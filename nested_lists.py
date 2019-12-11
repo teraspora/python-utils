@@ -4,7 +4,7 @@
 
 def is_nested_in(arr: list, val) -> bool:
     """
-    If val is nested, deeply or shallowly, within list arr, return True, else return False.
+    If val is nested in list arr, deeply or shallowly, return True, else return False.
     """
     if val in arr:
         return True
@@ -13,6 +13,12 @@ def is_nested_in(arr: list, val) -> bool:
             if type(item) is list and is_nested_in(item, val):
                 return True
     return False
+
+def get_depth_nested(arr: list, val) -> int:
+    """
+    If val is nested in list arr, deeply or shallowly, return the nesting depth as an int; else return 0.
+    """
+    return len(get_nested_ref(arr, val))
 
 def get_nested_ref(arr: list, val) -> list:
     """
@@ -44,6 +50,31 @@ def get_nested_item_from_indices(arr: list, index_list: list):
         item = item[index]
     return item
 
+def get_depth_total(arr: list) -> int:
+    """
+    Return the sum of the nesting depths for all leaf elements in arr
+    """
+    body_list = get_leaf_elements(arr)
+    depth = 0
+    for body in body_list:
+        curr_depth = get_depth_nested(arr, body)
+        depth += curr_depth
+        print(f'Body: {body} - Depth: {curr_depth}')
+    return depth
+
+def get_leaf_elements(arr: list) -> list:
+    """
+    Get all leaf elements (strings) nested in list arr, deeply or shallowly.
+    """
+    leaves = []
+    for item in arr:
+        if type(item) is not list:
+            leaves +=[item]
+        else:
+            leaves += get_leaf_elements(item)
+    return leaves
+
+
 # Usage
 
 # print(get_nested_ref([1,2,3,4,5], 4))
@@ -62,3 +93,5 @@ def get_nested_item_from_indices(arr: list, index_list: list):
 # get_nested_item_from_indices(a, [5, 1, 0, 2, 4, 6])
 # [2, [4]]
 
+# com =['b',['g',['h']], ['c',['d', ['i'],['e',['j',['k',['l']]],['f']]]]]
+# comr = ['b', 'c', 'd', 'i', 'e', 'j', 'k', 'l', 'f', 'g', 'h']

@@ -1,10 +1,9 @@
-# Reverse array - equivalent to reversed(arr) or arr[::-1]
-def rev(arr):
-    revarr = []
-    for n in range(1, len(arr) + 1):
-         revarr.append(arr[-n])
-    return revarr
- 
+# ts_tools.py
+
+# Some tools for working with the OS file system
+# Author:  John Lynch
+# November 2019
+
 # Print directory contents
 def pdc(path):
     import os
@@ -34,3 +33,4 @@ def flat(arr):
         else:
             flat_arr += flat(el)
     return flat_arr
+
