@@ -18,5 +18,5 @@ def partition(arr, func):
     keys = set(map(func, arr))
     for key in keys:
         kl = Klist(list(set([x for x in arr if func(x) == key])), key)
-        plist.append(kl)
+        plist.append(list(kl))
     return plist
