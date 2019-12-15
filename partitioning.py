@@ -20,5 +20,6 @@ def partition(arr, func):
         plist.append(partn)
     return plist
 
+from math import ceil, sqrt
 primes = lambda k: [2] + sorted(partition(range(2, k), lambda n: all(n % i for i in ([2] + list(range(3, ceil(sqrt(n)) + 1, 2)))))[1])
 
