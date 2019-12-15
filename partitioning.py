@@ -19,3 +19,6 @@ def partition(arr, func):
         partn = [*set([x for x in arr if func(x) == key])]
         plist.append(partn)
     return plist
+
+primes = lambda k: [2] + sorted(partition(range(2, k), lambda n: all(n % i for i in ([2] + list(range(3, ceil(sqrt(n)) + 1, 2)))))[1])
+
