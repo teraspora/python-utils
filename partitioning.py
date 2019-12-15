@@ -10,13 +10,12 @@ class Klist:
 
 def partition(arr, func):
     """
-    Return a list of Klist objects, being partitions of set(arr)
-    according to the provided function, the keys being the set of results 
-    of applying the function func to each element of arr
+    Return a list of lists, being partitions of set(arr)
+    according to the provided function.
     """
     plist = []
     keys = set(map(func, arr))
     for key in keys:
-        kl = Klist(list(set([x for x in arr if func(x) == key])), key)
-        plist.append(list(kl))
+        partn = [*set([x for x in arr if func(x) == key])]
+        plist.append(partn))
     return plist
