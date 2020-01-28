@@ -1,0 +1,49 @@
+>>> def store():
+...     ostore = []
+...     def store_object(obj):
+...         ostore.append(obj)
+...     def get_store():
+...         return ostore
+...     def clear():
+...         ostore.clear()
+...     return store_object, get_store, clear, lambda: len(ostore)
+... 
+>>> store_thing, get_store, clear_store, store_size = store()
+>>> get_store()
+[]
+>>> store_size()
+0
+>>> store_thing('biro')
+>>> store_thing('milk')
+>>> store_thing(1.99)
+>>> get_store()
+['biro', 'milk', 1.99]
+>>> clear_store()
+>>> get_store()
+['biro', 'milk', 1.99]
+>>> store_size()
+3
+>>> def store():
+...     ostore = []
+...     def store_object(obj):
+...         ostore.append(obj)
+...     def get_store():
+...         return ostore
+...     def clear():
+...         nonlocal ostore
+...         ostore = []
+...     return store_object, get_store, clear, lambda: len(ostore)
+... 
+>>> store_thing, get_store, clear_store, store_size = store()
+>>> store_thing([2,8,32])
+>>> store_size()
+1
+>>> store_thing('milk')
+>>> store_size()
+2
+>>> get_store()
+[[2, 8, 32], 'milk']
+>>> clear_store()
+>>> get_store()
+[]
+>>> 
