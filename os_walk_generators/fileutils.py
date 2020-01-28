@@ -11,16 +11,9 @@ def choose_files(path, number):
     import os, random
     files = os.listdir(path)
     chosenfiles = random.choices(files, k = number)
-    return chosenfiles
+    return chosenfiles   
 
-
-
-
-
-
-    
-
-def EXTRA_CODE:
+# Notes:
 
     imgs = fu.get_files('*.png', '/media/john/sys2/web18/playground/visuals/imgs')
 
