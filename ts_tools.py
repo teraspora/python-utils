@@ -34,3 +34,29 @@ def flat(arr):
             flat_arr += flat(el)
     return flat_arr
 
+# Some functions to flatten a nested dict
+people = {1: {'name': 'John', 'age': '27', 'sex': 'Male'},
+          2: {'name': 'Marie', 'age': '22', 'sex': 'Female'},
+          3: {'name': 'Luna', 'age': '24', 'sex': 'Female', 'married': 'No'},
+          4: {'name': 'Peter', 'age': '29', 'sex': {'birth':'Male', 'current': 'tapir'}, 'married': 'Yes'}}
+
+def dlist(d):
+    kvs = []
+    for k,v in d.items():        
+        if not isinstance(v, dict):     
+            kvs.append((k, v))
+        else: 
+            kvs += dlist(v)
+    return kvs
+
+def dlist_ex(d, klist):
+    if not klist:
+        klist = ''
+    kvs = []
+    for k,v in d.items():        
+        if not isinstance(v, dict):     
+            kvs.append((f"{k}{'-' + klist if klist else ''}", v))
+        else: 
+            kvs += dlist_ex(v, f"{k}{'-' + klist if klist else ''}")
+    return kvs
+
